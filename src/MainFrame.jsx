@@ -1,4 +1,4 @@
-import alphaSetup from './assets/ALPHA-g Schematic_v2.png';
+import alphaSetup from './assets/ALPHA-g Schematic_v2.pdf';
 import React, { useState } from 'react';
 import './styles/MainFrame.css';
 import Blink from './Blink';

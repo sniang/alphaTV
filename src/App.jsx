@@ -8,6 +8,7 @@ function App() {
     <>
       <MainTitle />
       <MainFrame data={data} />
+      <h1>It's just a demo</h1>
     </>
   )
 }
