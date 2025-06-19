@@ -1,0 +1,28 @@
+div.element-info {
+    border: 1px solid black;
+}
+
+.green-bg {
+    animation: oscillate-green-bg 1s infinite alternate;
+}
+.red-bg {
+    animation: oscillate-red-bg 0.2s infinite alternate;
+}
+
+@keyframes oscillate-green-bg {
+    from {
+        background-color: white;
+    }
+    to {
+        background-color: green;
+    }
+}
+
+@keyframes oscillate-red-bg {
+    from {
+        background-color: white;
+    }
+    to {
+        background-color: red;
+    }
+}
