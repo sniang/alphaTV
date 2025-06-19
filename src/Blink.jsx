@@ -1,12 +1,12 @@
 import './styles/Blink.css';
 
-const Blink = ({  props, onMouseEnter, onMouseLeave }) => {
+const Blink = ({  props, onMouseEnter, onClick }) => {
     const {x, y, error} = props;
     return (
         <div 
             className={`blink ${error ? "red-bg" : "green-bg"}`}
             onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
+            onClick={onClick}
             style={{
                 left: `${x}%`,
                 top: `${y}%`,

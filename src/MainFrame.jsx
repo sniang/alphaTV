@@ -22,16 +22,21 @@ const MainFrame = ({ data }) => {
         alert(`Coordinates: (${xPercent.toFixed(2)}%, ${yPercent.toFixed(2)}%)`);
     };
 
+    const handleOnclick = (event) => {
+        setSelectedElement(null);
+        getXY(event);
+        };
+
     return (
         <div id="mainFrame" className="borderContainer">
-            <div id="onMouseArea" onClick={getXY}>
+            <div id="onMouseArea" onClick={handleOnclick}>
                 <img src={alphaSetup} alt="Setup of the AlphaExperiment" />
                 {data && data.map((element, index) => (
                     <Blink
                         key={index}
                         props={element}
                         onMouseEnter={() => setSelectedElement(element)}
-                        onMouseLeave={() => setSelectedElement(null)}
+                        onClick={(e) => e.stopPropagation()}
                     />
                 ))}
                 {selectedElement && <DisplayInfo selectedElement={selectedElement} />}
