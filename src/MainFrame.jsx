@@ -1,7 +1,7 @@
 import alphaSetup from './assets/ALPHA-g Schematic_v2.png';
 import React, { useState } from 'react';
 import './styles/MainFrame.css';
-import ElementInfo from './ElementInfo';
+import Blink from './Blink';
 
 /**
  * 
@@ -9,9 +9,7 @@ import ElementInfo from './ElementInfo';
  * @author Samuel Niang
  * @returns {JSX.Element} 
  */
-const MainFrame = ({ data }) => {
-    const [message, setMessage] = useState("");
-
+const MainFrame = ({ data, setSelectedElement }) => {
 
     const getXY = (event) => {
         const rect = event.target.getBoundingClientRect();
@@ -19,19 +17,25 @@ const MainFrame = ({ data }) => {
         const y = event.clientY - rect.top;
         const xPercent = (x / rect.width) * 100;
         const yPercent = (y / rect.height) * 100;
-        setMessage(`Coordinates: (${xPercent.toFixed(2)}%, ${yPercent.toFixed(2)}%)`);
+        alert(`Coordinates: (${xPercent.toFixed(2)}%, ${yPercent.toFixed(2)}%)`);
+    };
+
+    const handleElementMouseEnter = (element) => {
+        setSelectedElement(element);
     };
 
     return (
         <div id="mainFrame" className="borderContainer">
-            <div id="onMouseArea" onMouseMove={getXY}>
+            <div id="onMouseArea" onClick={getXY}>
                 <img src={alphaSetup} alt="Setup of the AlphaExperiment" />
                 {data && data.map((element, index) => (
-                    <ElementInfo key={index} props={element} />
+                    <Blink
+                        key={index}
+                        props={element}
+                        onMouseEnter={() => setSelectedElement(element)}
+                        onMouseLeave={() => setSelectedElement(null)}
+                    />
                 ))}
-            </div>
-            <div>
-                {message}
             </div>
         </div>
     );

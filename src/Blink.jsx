@@ -1,11 +1,12 @@
-import './styles/ElementInfo.css';
-import React from 'react';
+import './styles/Blink.css';
 
-const ElementInfo = ({  props }) => {
-    const {name, x, y, error, comment, setMessage} = props;
+const Blink = ({  props, onMouseEnter, onMouseLeave }) => {
+    const {x, y, error} = props;
     return (
         <div 
             className={`element-info ${error ? "red-bg" : "green-bg"}`}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
             style={{
                 left: `${x}%`,
                 top: `${y}%`,
@@ -19,4 +20,4 @@ const ElementInfo = ({  props }) => {
     );
 }
 
-export default ElementInfo;
+export default Blink;
