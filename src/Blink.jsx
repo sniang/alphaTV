@@ -22,10 +22,9 @@ const Blink = ({ props, onMouseEnter, onClick }) => {
             onMouseEnter={onMouseEnter}
             onClick={onClick}
             style={{
+                position: 'absolute',
                 left: `${x}%`,
                 top: `${y}%`,
-                position: 'absolute',
-                margin: 0,
                 transform: 'translate(-50%, -50%)'
             }}>
         </div>
