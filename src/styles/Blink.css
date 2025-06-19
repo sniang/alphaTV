@@ -1,10 +1,13 @@
-div.element-info {
+div.blink {
     border: 1px solid black;
+    width: 1%;
+    height: 2%;
 }
 
 .green-bg {
     animation: oscillate-green-bg 1s infinite alternate;
 }
+
 .red-bg {
     animation: oscillate-red-bg 0.2s infinite alternate;
 }
@@ -13,6 +16,7 @@ div.element-info {
     from {
         background-color: white;
     }
+
     to {
         background-color: green;
     }
@@ -22,6 +26,7 @@ div.element-info {
     from {
         background-color: white;
     }
+
     to {
         background-color: red;
     }

@@ -2,6 +2,7 @@ import alphaSetup from './assets/ALPHA-g Schematic_v2.png';
 import React, { useState } from 'react';
 import './styles/MainFrame.css';
 import Blink from './Blink';
+import DisplayInfo from './DisplayInfo';
 
 /**
  * 
@@ -9,7 +10,8 @@ import Blink from './Blink';
  * @author Samuel Niang
  * @returns {JSX.Element} 
  */
-const MainFrame = ({ data, setSelectedElement }) => {
+const MainFrame = ({ data }) => {
+    const [selectedElement, setSelectedElement] = useState(null);
 
     const getXY = (event) => {
         const rect = event.target.getBoundingClientRect();
@@ -18,10 +20,6 @@ const MainFrame = ({ data, setSelectedElement }) => {
         const xPercent = (x / rect.width) * 100;
         const yPercent = (y / rect.height) * 100;
         alert(`Coordinates: (${xPercent.toFixed(2)}%, ${yPercent.toFixed(2)}%)`);
-    };
-
-    const handleElementMouseEnter = (element) => {
-        setSelectedElement(element);
     };
 
     return (
@@ -36,6 +34,7 @@ const MainFrame = ({ data, setSelectedElement }) => {
                         onMouseLeave={() => setSelectedElement(null)}
                     />
                 ))}
+                {selectedElement && <DisplayInfo selectedElement={selectedElement} />}
             </div>
         </div>
     );
