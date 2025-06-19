@@ -1,0 +1,26 @@
+#mainTitle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+#mainTitle img {
+    height: 50px;
+}
+
+#mainTitle h1 {
+    font-size: 50pt;
+    font-weight: 700;
+    margin: 0;
+}
+
+.borderContainer {
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: white;
+    width: 80%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

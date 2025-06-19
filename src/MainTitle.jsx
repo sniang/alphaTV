@@ -1,5 +1,4 @@
 import alphaLogo from './assets/ALPHA_Logo_png.png';
-import tvLogo from './assets/TV.png';
 
 /**
  * 
@@ -9,8 +8,10 @@ import tvLogo from './assets/TV.png';
  */
 const MainTitle = () => {
     return (
-            
-            <h1 id="mainTitle"><img src={alphaLogo} alt="Logo of the ALPHA experiment" />ALPHA TV<img src={tvLogo} alt="Logo of a TV" /></h1>
+            <div id="mainTitle">
+                <img src={alphaLogo} alt="Logo of the ALPHA experiment" />
+                <h1>ALPHA TV</h1>
+            </div>
     );
 }
 export default MainTitle;
