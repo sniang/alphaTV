@@ -30,8 +30,7 @@ const DisplayInfo = ({ selectedElement }) => {
                         left: `${selectedElement.x}%`,
                         top: `${selectedElement.y}%`,
                         position: 'absolute',
-                        margin: 0,
-                        // transform: 'translate(-50%, -50%)'
+                        margin: 0
                     }}>
                     <strong>{selectedElement.name}</strong><br />
                     {selectedElement.error && "There is an error with this element."}

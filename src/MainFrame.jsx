@@ -5,12 +5,6 @@ import Blink from './Blink';
 import DisplayInfo from './DisplayInfo';
 
 /**
- * 
- * @component
- * @author Samuel Niang
- * @returns {JSX.Element} 
- */
-/**
  * MainFrame component renders the main interactive area for the AlphaExperiment setup.
  * It displays an image, overlays interactive elements, and handles user interactions such as clicks and hovers.
  * On click, it calculates and alerts the relative coordinates within the image.
@@ -35,7 +29,7 @@ const MainFrame = ({ data }) => {
     const handleOnclick = (event) => {
         setSelectedElement(null);
         getXY(event);
-        };
+    };
 
     return (
         <div id="mainFrame" className="borderContainer">
@@ -54,4 +48,5 @@ const MainFrame = ({ data }) => {
         </div>
     );
 }
+
 export default MainFrame;

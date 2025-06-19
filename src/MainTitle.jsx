@@ -25,4 +25,5 @@ const MainTitle = () => {
         </div>
     );
 }
+
 export default MainTitle;
