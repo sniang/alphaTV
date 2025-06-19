@@ -10,6 +10,16 @@ import DisplayInfo from './DisplayInfo';
  * @author Samuel Niang
  * @returns {JSX.Element} 
  */
+/**
+ * MainFrame component renders the main interactive area for the AlphaExperiment setup.
+ * It displays an image, overlays interactive elements, and handles user interactions such as clicks and hovers.
+ * On click, it calculates and alerts the relative coordinates within the image.
+ * When an element is hovered, detailed information is displayed.
+ *
+ * @component
+ * @param {Object[]} data - Array of element data to be rendered as interactive overlays.
+ * @author Samuel Niang
+ */
 const MainFrame = ({ data }) => {
     const [selectedElement, setSelectedElement] = useState(null);
 

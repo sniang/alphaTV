@@ -3,7 +3,6 @@ div.blink {
     width: 1%;
     height: 2%;
 }
-
 .green-bg {
     animation: oscillate-green-bg 1s infinite alternate;
 }
