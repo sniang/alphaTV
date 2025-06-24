@@ -79,6 +79,23 @@ export function getMostRecentImage(stick = "PB2") {
 // Routes
 // =====================
 
+app.get('/api/MCP/:stick', (req, res) => {
+    const sticks = ["AT","AT_US", "BDS", "CT", "CT_US", "LDS", "PB2", "PDS", "UDS"];
+    const stick = req.params.stick
+    if (!sticks.includes(stick)) {
+        return res.status(400).json({ error: `Invalid stick: ${stick}. Valid options are: ${sticks.join(', ')}` });
+    }
+    const imagePath = getMostRecentImage(stick);
+    if (!imagePath) {
+        return res.status(404).json({ error: 'No images found' });
+    }
+    const fullImagePath = path.join(MAINDIR, imagePath);
+    if (!fs.existsSync(fullImagePath)) {
+        return res.status(404).json({ error: 'Image file not found' });
+    }
+    res.sendFile(fullImagePath);
+});
+
 // ====================
 // Server Startup
 // ====================
