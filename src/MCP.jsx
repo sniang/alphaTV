@@ -11,10 +11,11 @@ import "./styles/MCP.css";
  * @component
  * @param {Object} props
  * @param {string} props.mcpName - The name of the MCP to fetch and display the image for.
+ * @param {string} props.stickName - The display name for the MCP.
  * @returns {JSX.Element} The rendered MCP image component.
  * @author Samuel Niang
  */
-const MCP = ({mcpName}) => {
+const MCP = ({mcpName, stickName}) => {
     // State to track loading status
     const [loading, setLoading] = useState(true);
     // State to store the image URL (created from blob)
@@ -59,16 +60,20 @@ const MCP = ({mcpName}) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [mcpName]);
 
+    if (!mcpName || !stickName) {
+        return null;
+    }
+    
     return (
         <div className="mcp-container">
             {/* Display the MCP name, replacing underscores with spaces */}
-            <h3>MCP picture from {mcpName.replace('_',' ')}</h3>
+            <h3>MCP picture from {stickName}</h3>
             {/* Show loading message while fetching */}
             {loading && <p>Loading MCP data...</p>}
             {/* Show error message if fetch failed */}
             {error && <p className="error">Error loading MCP data: {error}</p>}
             {/* Show the image if data is available */}
-            {data && <img src={data} alt={`MCP ${mcpName}`} />}
+            {data && <img src={data} alt={`MCP ${stickName}`} />}
             {/* Show fallback message if no data, no error, and not loading */}
             {!loading && !data && !error && <p>No MCP data available.</p>}
         </div>

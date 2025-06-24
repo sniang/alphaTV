@@ -16,9 +16,11 @@ function App() {
 export default App;
 
 const data = [
-  { name: "PDS", x: 95.50, y: 80.9, error: false, comment: "It's PDS stick" },
-  { name: "BDS", x: 78.7, y: 80.9, error: false, comment: "" },
-  { name: "DSAT", x: 53.45, y: 80.9, error: false, comment: "" },
-  { name: "USAT", x: 28.6, y: 80.9, error: true, comment: "" },
-  { name: "DSCT", x: 22.6, y: 80.9, error: true, comment: "" }
+  { name: "PDS", x: 95.50, y: 80.9, mcpName: "PDS", error: false, comment: "" },
+  { name: "BDS", x: 78.7, y: 80.9, mcpName: "BDS", error: false, comment: "" },
+  { name: "DSAT", x: 53.45, y: 80.9, mcpName: "AT", error: false, comment: "" },
+  { name: "USAT", x: 28.6, y: 80.9, mcpName: "AT_US", error: false, comment: "" },
+  { name: "DSCT", x: 22.6, y: 80.9, mcpName: "CT", error: false, comment: "" }
 ];
+
+//AT, AT_US, BDS, CT, CT_US, LDS, PB2, PDS, UDS
