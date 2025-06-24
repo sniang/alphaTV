@@ -14,8 +14,8 @@ import './styles/Blink.css';
  *
  * @author Samuel Niang
  */
-const Blink = ({ props, onMouseEnter, onClick }) => {
-    const { x, y, error } = props;
+const Blink = ({ element, onMouseEnter, onClick }) => {
+    const { x, y, error } = element;
     return (
         <div
             className={`blink ${error ? "red-bg" : "green-bg"}`}

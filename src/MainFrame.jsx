@@ -17,7 +17,8 @@ import MCP from './MCP';
  */
 const MainFrame = ({ data }) => {
     const [selectedElement, setSelectedElement] = useState(null);
-    const [mcpName, setMcpName] = useState("PB2");
+    const [mcpName, setMcpName] = useState(null);
+    const [stickName, setStickName] = useState(null);
 
     const getXY = (event) => {
         const rect = event.target.getBoundingClientRect();
@@ -30,7 +31,9 @@ const MainFrame = ({ data }) => {
 
     const handleOnclick = (event) => {
         setSelectedElement(null);
-        getXY(event);
+        setMcpName(null);
+        setStickName(null);
+        // getXY(event);
     };
 
     return (
@@ -40,13 +43,17 @@ const MainFrame = ({ data }) => {
                 {data && data.map((element, index) => (
                     <Blink
                         key={index}
-                        props={element}
-                        onMouseEnter={() => setSelectedElement(element)}
+                        element={element}
+                        onMouseEnter={() => {
+                            setSelectedElement(element)
+                            setMcpName(element.mcpName);
+                            setStickName(element.name);
+                        }}
                         onClick={(e) => e.stopPropagation()}
                     />
                 ))}
                 {selectedElement && <DisplayInfo selectedElement={selectedElement} />}
-                <MCP mcpName={mcpName}/>
+                <MCP mcpName={mcpName} stickName={stickName}/>
             </div>
         </div>
     );

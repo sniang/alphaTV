@@ -26,10 +26,15 @@ const MCP = ({mcpName, stickName}) => {
     useEffect(() => {
         // Fetches the image from the backend API
         const fetchImage = async () => {
+            setData(null); // Reset data state before fetching
+            setLoading(true); // Set loading state to true
+            setError(null); // Reset error state before fetching
+
             try {
                 setLoading(true); // Start loading
                 setError(null);   // Reset error state
                 // Make API request to fetch the image for the given MCP name
+                console.log(`http://localhost:3001/api/MCP/${mcpName}`)
                 const response = await fetch(`http://localhost:3001/api/MCP/${mcpName}`);
                 // If response is not OK, parse error message and throw
                 if (!response.ok) {
@@ -58,7 +63,7 @@ const MCP = ({mcpName, stickName}) => {
         };
         // Only re-run effect when mcpName changes
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [mcpName]);
+    }, [mcpName, stickName]);
 
     if (!mcpName || !stickName) {
         return null;
