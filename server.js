@@ -1,14 +1,23 @@
+/**
+ * ALPHA TV API Server
+ * Author: Samuel Niang
+ *
+ * This Express.js API serves data and images related to the ALPHA experiment at CERN.
+ * It is designed to provide backend support for the ALPHA TV React app, which displays
+ * the live status of different apparatus components.
+ */
+
 import express from 'express';      // Express.js web framework
 import cors from 'cors';            // Middleware for enabling CORS
 import dotenv from 'dotenv';        // Loads environment variables from .env file
-import fs from 'fs';
-import path from 'path';
+import fs from 'fs';                // Node.js file system module
+import path from 'path';            // Node.js path utilities
 
 // ====================
 // Environment & Config
 // ====================
 
-// Load environment variables
+// Load environment variables from .env file (if present)
 dotenv.config();
 
 // Initialize Express application
@@ -16,22 +25,27 @@ const app = express();
 
 // Set server port from environment or default to 3001
 const PORT = process.env.PORT || 3001;
-export const MAINDIR = process.env.MAINDIR || '/Volumes/dfs/Experiments/ALPHA'; // Base directory for all data files
+
+// Base directory for all data files (can be overridden by environment variable)
+export const MAINDIR = process.env.MAINDIR || '/Volumes/dfs/Experiments/ALPHA';
 
 
 // ====================
 // Middleware
 // ====================
 
-// Enable CORS for all routes
+// Enable CORS for all routes (allows requests from any origin)
 app.use(cors());
+
 
 // =====================
 // Utilities
 // =====================
+
 /**
- * Returns the current year and month as a string in the format "YYYY-MM".
- * @returns {string} - Year and month, e.g., "2024-06"
+ * Returns the current year and month as a string in the format "YYYY/MM".
+ * Used to construct paths to monthly data/image folders.
+ * @returns {string} - Year and month, e.g., "2024/06"
  */
 export function getCurrentYearMonth() {
     const now = new Date();
@@ -42,7 +56,9 @@ export function getCurrentYearMonth() {
 
 /**
  * Recursively get all .png image file names in a directory and its subdirectories.
- * @param {string} dir - Directory to search.
+ * Used to find all MCP images for a given stick and month.
+ * @param {string} stick - Stick identifier (e.g., "PB2")
+ * @param {string|null} dir - Directory to search (defaults to current month for stick)
  * @returns {string[]} - Array of .png file paths relative to MAINDIR.
  */
 export function getAllPngImages(stick = "PB2", dir = null) {
@@ -64,6 +80,7 @@ export function getAllPngImages(stick = "PB2", dir = null) {
 
 /**
  * Returns the most recent .png image path found by getAllPngImages.
+ * Used to provide the latest MCP image for a given stick.
  * @param {string} stick - The stick identifier.
  * @returns {string|null} - The relative path to the most recent image, or null if none found.
  */
@@ -75,10 +92,17 @@ export function getMostRecentImage(stick = "PB2") {
     return images[images.length - 1];
 }
 
+
 // =====================
 // Routes
 // =====================
 
+/**
+ * GET /api/MCP/:stick
+ * Returns the most recent MCP image for the specified stick.
+ * Valid stick values: AT, AT_US, BDS, CT, CT_US, LDS, PB2, PDS, UDS
+ * Responds with the image file or an error message.
+ */
 app.get('/api/MCP/:stick', (req, res) => {
     const sticks = ["AT","AT_US", "BDS", "CT", "CT_US", "LDS", "PB2", "PDS", "UDS"];
     const stick = req.params.stick
@@ -96,15 +120,19 @@ app.get('/api/MCP/:stick', (req, res) => {
     res.sendFile(fullImagePath);
 });
 
+
 // ====================
 // Server Startup
 // ====================
 
-// Start the server and listen on the specified port
+/**
+ * Starts the Express server and logs configuration details.
+ */
 app.listen(PORT, '0.0.0.0', () => {
     console.log('Server started');
     console.log(`Server is running at http://localhost:${PORT}`);
     console.log(`Main directory is set to: ${MAINDIR}`);
 });
 
+// For debugging: call getMostRecentImage() at startup
 getMostRecentImage()
