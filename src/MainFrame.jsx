@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import './styles/MainFrame.css';
 import Blink from './Blink';
 import DisplayInfo from './DisplayInfo';
+import MCP from './MCP';
 
 /**
  * MainFrame component renders the main interactive area for the AlphaExperiment setup.
@@ -16,6 +17,7 @@ import DisplayInfo from './DisplayInfo';
  */
 const MainFrame = ({ data }) => {
     const [selectedElement, setSelectedElement] = useState(null);
+    const [mcpName, setMcpName] = useState("PB2");
 
     const getXY = (event) => {
         const rect = event.target.getBoundingClientRect();
@@ -44,6 +46,7 @@ const MainFrame = ({ data }) => {
                     />
                 ))}
                 {selectedElement && <DisplayInfo selectedElement={selectedElement} />}
+                <MCP mcpName={mcpName}/>
             </div>
         </div>
     );

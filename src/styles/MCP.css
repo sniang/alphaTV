@@ -1,0 +1,21 @@
+.mcp-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    position: absolute;
+    left: 30%;
+    top: 25%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+}
+
+.mcp-container h3 {
+    margin: 0;
+    padding: 0;
+}
