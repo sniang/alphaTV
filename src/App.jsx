@@ -16,6 +16,7 @@ function App() {
 export default App;
 
 const data = [
+  { name: "PB2", x: 70, y: 40, mcpName: "PB2", error: false, comment: "" },
   { name: "PDS", x: 95.50, y: 80.9, mcpName: "PDS", error: false, comment: "" },
   { name: "BDS", x: 78.7, y: 80.9, mcpName: "BDS", error: false, comment: "" },
   { name: "DSAT", x: 53.45, y: 80.9, mcpName: "AT", error: false, comment: "" },

@@ -43,18 +43,6 @@ app.use(cors());
 // =====================
 
 /**
- * Returns the current year and month as a string in the format "YYYY/MM".
- * Used to construct paths to monthly data/image folders.
- * @returns {string} - Year and month, e.g., "2024/06"
- */
-export function getCurrentYearMonth() {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    return `${year}/${month}`;
-}
-
-/**
  * Recursively get all .png image file names in a directory and its subdirectories.
  * Used to find all MCP images for a given stick and month.
  * @param {string} stick - Stick identifier (e.g., "PB2")
@@ -62,13 +50,38 @@ export function getCurrentYearMonth() {
  * @returns {string[]} - Array of .png file paths relative to MAINDIR.
  */
 export function getAllPngImages(stick = "PB2", dir = null) {
-    if (!dir) {
-        dir = path.join(MAINDIR, `MCP_images_${stick}`, getCurrentYearMonth());
+    function getYearMonthDay(offset = 0) {
+        const now = new Date();
+        now.setDate(now.getDate() + offset);
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        return `${year}/${month}/${day}`;
     }
+
+    // Try up to 31 days back if no images found
+    let baseDir = dir;
+    let found = false;
+    let searchDir = '';
+    for (let offset = 0; offset > -31; offset--) {
+        if (!baseDir) {
+            searchDir = path.join(MAINDIR, `MCP_Images_${stick}`, getYearMonthDay(offset));
+            console.log(`Searching in: ${searchDir}`);
+        } else {
+            searchDir = baseDir;
+        }
+        if (fs.existsSync(searchDir)) {
+            found = true;
+            break;
+        }
+        if (baseDir) break; // Only loop if dir is not provided
+    }
+    if (!found) return [];
+
     let results = [];
-    const list = fs.readdirSync(dir, { withFileTypes: true });
+    const list = fs.readdirSync(searchDir, { withFileTypes: true });
     for (const entry of list) {
-        const fullPath = path.join(dir, entry.name);
+        const fullPath = path.join(searchDir, entry.name);
         if (entry.isDirectory()) {
             results = results.concat(getAllPngImages(stick, fullPath));
         } else if (entry.isFile() && entry.name.toLowerCase().endsWith('.png')) {
